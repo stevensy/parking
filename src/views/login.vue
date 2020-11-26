@@ -84,7 +84,10 @@ export default {
                   storage.set('userInfo', { headimgurl, nickname, sex, position })
                 }
                 storage.set('account', account)
-                storage.set('username', res.data.username || this.nickname)
+                if (res.data.username || this.nickname) {
+                  storage.set('username', res.data.username || this.nickname)
+                }
+                
                 this.$router.push(res.isReserve ? '/' : '/order')
               }, 2000)
               
