@@ -28,6 +28,7 @@ export default {
       getWxconfig().then(res => {
         if (res.status) {
           this.appId = res.data.length && res.data[0].appId
+          storage.set('appid', this.appId)
         }
       })
       this.backUrl = this.$router.mode === 'hash' ? 'http://m.hejnet.cn/#/Auth' : 'http://m.hejnet.cn/Auth'
@@ -44,8 +45,8 @@ export default {
               cancelButtonText: '否',
               type: 'warning'
             }).then(data => {
-              let { openid, headimgurl, nickname, sex } = res.data
-              storage.set('userInfo', { headimgurl, nickname, sex: sex+'' })
+              let { openid, account, phone, headimgurl, nickname, sex, position } = res.data
+              storage.set('userInfo', { account, phone, headimgurl, nickname, sex: sex+'', position })
               location.href=`${location.origin}${this.$router.mode === 'hash' ? '/#' : ''}/login?type=1&openid=${openid}`
               // this.$router.push({ path: '/login', query: { type: 1, openid } })
             }, err => {
@@ -54,12 +55,9 @@ export default {
             })
           } else {
             // 已绑过的
-            let { openid, account, headimgurl, username: nickname, gender: sex } = res.data
-            if (openid) {
-              storage.set('openid', res.data.openid)
-              storage.set('userInfo', { headimgurl, nickname, sex })
-            }
-            account && storage.set('account', res.data.account)
+            let { openid, account, phone, headimgurl, username, nickname, gender: sex, position } = res.data
+            openid && storage.set('openid', openid)
+            storage.set('userInfo', { account, phone, headimgurl, username, nickname, sex, position })
             this.$router.push(res.isReserve ? '/' : '/order')
           }
         })

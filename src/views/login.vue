@@ -63,7 +63,7 @@ export default {
           this.loading = true
           let { account, password } = this.form
           setCookie('isRemember', this.checked ? 1 : 0)
-          login({ bind: this.type, account, password: md5(password), loginType: /^1[3|4|5|8][0-9]\d{4,8}$/.test(account) ? 'phone' : 'account', openid: this.openid, headimgurl: this.headimgurl, username: this.nickname, gender: this.sex && (this.sex + '') || undefined}).then(res => {
+          login({ bind: this.type, account, password: md5(password), loginType: /^1[3|4|5|8][0-9]\d{4,8}$/.test(account) ? 'phone' : 'account', openid: this.openid, headimgurl: this.headimgurl, nickname: this.nickname, gender: this.sex && (this.sex + '') || undefined}).then(res => {
             if (res.status) {
               this.$message({
                 type: 'success',
@@ -72,22 +72,9 @@ export default {
               })
               setTimeout(_ => {
                 this.loading = false
-                if (+this.type) {
-                  storage.set('openid', res.data.openid)
-                } else {
-                  let { openid, headimgurl, username: nickname, gender: sex, position } = res.data
-                  if (openid) {
-                    storage.set('openid', openid)
-                  } else {
-                    storage.set('auth', 'h5')
-                  }
-                  storage.set('userInfo', { headimgurl, nickname, sex, position })
-                }
-                storage.set('account', account)
-                if (res.data.username || this.nickname) {
-                  storage.set('username', res.data.username || this.nickname)
-                }
-                
+                let { account, phone, openid, headimgurl, username, nickname, gender: sex, position } = res.data
+                openid ? storage.set('openid', openid) : storage.set('auth', 'h5')
+                storage.set('userInfo', { account, phone, headimgurl, username, nickname, sex, position })
                 this.$router.push(res.isReserve ? '/' : '/order')
               }, 2000)
               

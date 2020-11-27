@@ -34,7 +34,7 @@ module.exports = {
         target: 'http://ipark.wy.chinafortune.com.cn:7001', // http://22099fa96cca.ngrok.io  http://m.hejnet.cn:7001
         changeOrigin: true,
         pathRewrite: {
-          ['^' + process.env.VUE_APP_APIURL]: process.env.VUE_APP_API  // 本地调试需要把/api 置为空
+          ['^' + process.env.VUE_APP_APIURL]: process.env.VUE_APP_APIURL  // 本地调试需要把/api 置为空
         }
       }
     },

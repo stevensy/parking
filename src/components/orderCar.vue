@@ -24,6 +24,7 @@
             size="mini"
             :editable="false"
             type="date"
+            :picker-options="options"
             value-format="yyyy-MM-dd"
             placeholder="结束日期">
           </el-date-picker>
@@ -75,7 +76,17 @@ export default {
     }
   },
   data() {
+    let _this = this;
     return {
+      options: {
+        disabledDate(time) {
+          let beginDateVal = _this.form.date[0]
+          if (beginDateVal) {
+            return time.getTime() < new Date(beginDateVal).getTime()
+          }
+          
+    　　}
+      },
       error: false,
       form: {
         license: undefined,

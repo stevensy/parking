@@ -30,7 +30,8 @@ export default {
   data() {
     return {
       form: {
-        phone: storage.get('account') || undefined,
+        account: storage.get('userInfo') && storage.get('userInfo').account || undefined,
+        phone: storage.get('userInfo') && storage.get('userInfo').phone || undefined,
         verificationCode: undefined,
         password: undefined
       },
@@ -79,8 +80,9 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           this.loading = true
-          let { phone: account, verificationCode, password } = this.form
-          findPWD({ account, verificationCode, password: md5(password) }).then(res => {
+          let { account, phone, verificationCode, password } = this.form
+          findPWD({ account, phone, verificationCode, password: md5(password) }).then(res => {
+            this.loading = false
             if (res.status) {
               this.$message({
                 type: 'success',
@@ -90,6 +92,12 @@ export default {
               setTimeout(() => {
                 this.$router.push({ path: '/login'})
               }, 1500)
+            } else {
+              this.$message({
+                type: 'error',
+                message: res.msg,
+                duration: 1500
+              })
             }
           })
           

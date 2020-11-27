@@ -56,7 +56,7 @@ export function getTimeRange (query) {
 
 // 预约列表
 export function bookingList (data = {}) {
-  data = Object.assign({}, data, { account: storage.get('account') })
+  data = Object.assign({}, data, { account: storage.get('userInfo') && storage.get('userInfo').account })
   return request({
     url: '/showReserve',
     method: 'post',
@@ -66,7 +66,7 @@ export function bookingList (data = {}) {
 
 // 修改预约
 export function editBooking (data) {
-  data = Object.assign({}, data, { account: storage.get('account') })
+  data = Object.assign({}, data, { account: storage.get('userInfo') && storage.get('userInfo').account })
   return request({
     url: '/updateReserve',
     method: 'post',
@@ -76,7 +76,7 @@ export function editBooking (data) {
 
 // 删除预约
 export function delBooking (data) {
-  data = Object.assign({}, data, { account: storage.get('account') })
+  data = Object.assign({}, data, { account: storage.get('userInfo') && storage.get('userInfo').account })
   return request({
     url: '/deleteReserve',
     method: 'post',

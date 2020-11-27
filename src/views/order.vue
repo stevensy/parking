@@ -49,8 +49,8 @@ export default {
         licenses: [{ license: '' }],
         linkman: undefined,
         linkmanPhone: undefined,
-        username: storage.get('username') || storage.get('userInfo') && storage.get('userInfo').nickname,
-        account: storage.get('account')
+        username: storage.get('userInfo') && storage.get('userInfo').username,
+        account: storage.get('userInfo') && storage.get('userInfo').account
       },
       rules: {
         entryTime: [{ required: true, message: '请选择进场时间', trigger: 'change' }],
