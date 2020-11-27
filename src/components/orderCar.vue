@@ -2,16 +2,17 @@
   <div>
     <el-form ref="form" :model="form" label-width="40px" style="text-align: left;">
       <el-form-item label="车牌" prop="license" style="margin-bottom: 10px">
-        <el-input size="mini" style="width: 100%" placeholder="请输入车牌" v-model="form.license"></el-input>
+        <el-input size="mini" style="width: 100%" clearable placeholder="请输入车牌" v-model="form.license"></el-input>
       </el-form-item>
       <el-form-item label="日期" prop="date"  style="margin-bottom: 10px">
         <el-col :span="11">
           <el-date-picker
-            v-model="form.date[0]"
+            v-model="form.dateRange[0]"
             style="width: 100%"
             size="mini"
             :editable="false"
             type="date"
+            clearable
             value-format="yyyy-MM-dd"
             placeholder="开始日期">
           </el-date-picker>
@@ -19,11 +20,12 @@
         <el-col :span="2" style="text-align: center">-</el-col>
         <el-col :span="11">
           <el-date-picker
-            v-model="form.date[1]"
+            v-model="form.dateRange[1]"
             style="width: 100%"
             size="mini"
             :editable="false"
             type="date"
+            clearable
             :picker-options="options"
             value-format="yyyy-MM-dd"
             placeholder="结束日期">
@@ -49,7 +51,7 @@
       </div>
       <div class="info-edit" v-if="!+item.status">
         <!-- <el-button type="primary" class="changeBtn" size="mini" @click="change(item)">修改</el-button> -->
-        <el-button type="danger" size="mini" @click="del(item.id)">删除</el-button>
+        <el-button v-if="+item.status===0" type="danger" size="mini" @click="del(item.orderId)">删除</el-button>
       </div>
     </div>
     <InfiniteLoading spinner="waveDots" ref="infiniteLoading" :distance="50" @infinite="infiniteHandler">
@@ -80,17 +82,16 @@ export default {
     return {
       options: {
         disabledDate(time) {
-          let beginDateVal = _this.form.date[0]
+          let beginDateVal = _this.form.dateRange[0]
           if (beginDateVal) {
             return time.getTime() < new Date(beginDateVal).getTime()
           }
-          
     　　}
       },
       error: false,
       form: {
         license: undefined,
-        date: [],
+        dateRange: [],
       },
       statusList: ['历史', '预约', '入场'],
       state: [], // 防重重点击
@@ -109,7 +110,7 @@ export default {
   },
   methods: {
     search() {
-      if (this.form.date && this.form.date.length === 1) {
+      if ((!this.form.dateRange[0] && this.form.dateRange[1]) || (this.form.dateRange[0] && !this.form.dateRange[1])) {
         this.error = true
         return 
       }

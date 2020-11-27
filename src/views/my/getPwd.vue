@@ -99,6 +99,8 @@ export default {
                 duration: 1500
               })
             }
+          }).catch(e => {
+            this.loading = false
           })
           
         }

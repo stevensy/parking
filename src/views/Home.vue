@@ -140,13 +140,13 @@ export default {
       this.editDialog = true
       this.getTime()
     },
-    del(id) {
+    del(orderId) {
       this.$confirm('删除后不可恢复，您确定删除该预约信息吗？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        delBooking({ id }).then(res => {
+        delBooking({ orderId }).then(res => {
           if (res.status) {
             this.$message({
               type: 'success',
@@ -204,7 +204,7 @@ export default {
         return false
       }
       this.state = true
-      let { id, account, entryTime, leaveTime, linkman, license, linkmanPhone, status } = this.orderForm 
+      let { orderId, account, entryTime, leaveTime, linkman, license, linkmanPhone, status } = this.orderForm 
       // 较验时间
       if (new Date(entryTime).getTime() >= new Date(leaveTime).getTime()) {
         this.$message.error('离场时间不能小于进场时间!')
@@ -212,7 +212,7 @@ export default {
       }
       this.$refs.orderForm.validate((valid) => {
         if (valid) {
-          editBooking({ id, account, entryTime, leaveTime, linkman, license, linkmanPhone }).then(res => {
+          editBooking({ orderId, account, entryTime, leaveTime, linkman, license, linkmanPhone }).then(res => {
             if (res.status) {
               this.$message({
                 type: 'success',
