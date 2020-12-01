@@ -91,7 +91,7 @@ export default {
       error: false,
       form: {
         license: undefined,
-        dateRange: [],
+        dateRange: [new Date(new Date().getFullYear(), new Date().getMonth(), 1).toLocaleDateString().replace(/\//g, '-'), new Date(new Date().getFullYear(), new Date().getMonth()+1, 0).toLocaleDateString().replace(/\//g, '-')],
       },
       statusList: ['历史', '预约', '入场'],
       state: [], // 防重重点击
@@ -114,8 +114,17 @@ export default {
         this.error = true
         return 
       }
+      if (!this.form.dateRange[0] && !this.form.dateRange[1]) {
+        this.form.dateRange = []
+      }
+      
       this.error = false
-      this.$emit('search', { filter: this.form, status: this.status})
+      let filter = Object.assign({}, { license: this.form.license })
+      if (this.form.dateRange.length) {
+        filter = Object.assign({}, filter, { dateRange: this.form.dateRange })
+      }
+
+      this.$emit('search', { filter, status: this.status})
     },
     change(row) {
       this.$emit('change', row)

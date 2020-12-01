@@ -64,11 +64,11 @@ export default {
       if (this.code && !this.openid && !this.avatar) {
         getOpenId({ code: this.code }).then(res => {
           if (res.status === 0) {
-            let { openid, headimgurl, nickname, sex } = res.data
+            let { account, openid, headimgurl, nickname, sex } = res.data
             storage.set('userInfo', { headimgurl, nickname, sex })
             storage.set('openid', openid)
             this.openid = openid
-            bindOrUnbindWx(0, { account: this.account, openid, headimgurl, username: nickname, gender: sex }).then(res => {
+            bindOrUnbindWx(0, { account, openid, headimgurl, nickname, gender: sex + '' }).then(res => {
               if (res.status) {
                 this.$message({
                   type: 'success',
@@ -112,7 +112,7 @@ export default {
     },
     logout() {
       storage.clear()
-      location.reload()
+      this.$router.push({path: '/login'})
     }
   }
 }

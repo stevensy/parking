@@ -15,9 +15,9 @@
         <i slot="prefix" class="el-icon-lock"></i>
       </el-input>
     </el-form-item>
-     <el-form-item style="text-align: left">
-      <el-checkbox v-model="checked">记信账号密码</el-checkbox>
-     </el-form-item>
+     <!-- <el-form-item style="text-align: left">
+      <el-checkbox v-model="checked">记住账号密码</el-checkbox>
+     </el-form-item> -->
     <el-form-item>
       <el-button :loading="loading" class="loginBtn" type="primary" size="medium" @click="toLogin">登录</el-button>
     </el-form-item>
