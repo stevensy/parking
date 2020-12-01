@@ -42,7 +42,6 @@ export default {
       userInfo:  storage.get('userInfo'),
       openid: storage.get('openid'),
       code: getQuery('code').code,
-      appid: storage.get('appid'),
       backUrl: undefined,
       state: false
     }
@@ -107,7 +106,7 @@ export default {
           }
         })
       } else {
-        window.location.assign(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${ this.appid }&redirect_uri=${ encodeURIComponent(this.backUrl) }&response_type=code&scope=snsapi_userinfo&state=0&connect_redirect=1#wechat_redirect`)
+        window.location.assign(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${ JSON.parse(sessionStorage.getItem('appid')) }&redirect_uri=${ encodeURIComponent(this.backUrl) }&response_type=code&scope=snsapi_userinfo&state=0&connect_redirect=1#wechat_redirect`)
       }
     },
     logout() {
