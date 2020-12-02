@@ -186,7 +186,7 @@ export function handleTree(data, id, parentId, children, rootId) {
 	}
 
 	let isRemember = () => {
-		return getCookie('isRemember')
+		return getCookie('isRemember') || '1'
 	}
 	// 缓存读取
 	export const storage = {

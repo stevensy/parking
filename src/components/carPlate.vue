@@ -168,13 +168,16 @@ export default {
         },
         {
           classStyle: ""
+        },
+        {
+          classStyle: ""
         }
       ],
       currentIndex: 0,
       chooseKey: [],
       hasPro: "",
       showFlag: 0,
-      MAX_INDEX: 6
+      MAX_INDEX: 7
     };
   },
   methods: {
@@ -334,6 +337,7 @@ export default {
 .ul_input {
   padding: 20px;
   margin: 0 auto;
+  display: flex;
 }
 
 .ul_input li .active {

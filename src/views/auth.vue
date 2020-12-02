@@ -28,10 +28,10 @@ export default {
       getWxconfig().then(res => {
         if (res.status) {
           this.appId = res.data.length && res.data[0].appId
-          storage.set('appid', this.appId)
+          storage.set('appId', this.appId)
         }
       })
-      this.backUrl = this.$router.mode === 'hash' ? 'http://m.hejnet.cn/#/Auth' : 'http://m.hejnet.cn/Auth'
+      this.backUrl = this.$router.mode === 'hash' ? `${location.origin}/#/Auth` : `${location.origin}/Auth`
       if(this.code) {
         this.loading = true
         getOpenId({ code: this.code }).then(res => {

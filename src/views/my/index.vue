@@ -34,7 +34,7 @@
 <script>
 import Bar from '../../components/bar.vue'
 import { storage, getQuery } from '../../utils/index'
-import { getOpenId, bindOrUnbindWx } from '@/api/'
+import { getWxconfig, getOpenId, bindOrUnbindWx } from '@/api/'
 export default {
   components: { Bar },
   data() {
@@ -42,6 +42,7 @@ export default {
       userInfo:  storage.get('userInfo'),
       openid: storage.get('openid'),
       code: getQuery('code').code,
+      appId: storage.get('appId'),
       backUrl: undefined,
       state: false
     }
@@ -80,6 +81,16 @@ export default {
         })
       }
     },
+    getAppId(fn) {
+      // 获取appId
+      getWxconfig().then(res => {
+        if (res.status) {
+          this.appId = res.data.length && res.data[0].appId
+          storage.set('appId', this.appId)
+          fn && fn()
+        }
+      })
+    },
     errorHandler() {
       return true
     },
@@ -106,8 +117,17 @@ export default {
           }
         })
       } else {
-        window.location.assign(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${ JSON.parse(sessionStorage.getItem('appid')) }&redirect_uri=${ encodeURIComponent(this.backUrl) }&response_type=code&scope=snsapi_userinfo&state=0&connect_redirect=1#wechat_redirect`)
+        if (!this.appId) {
+          this.getAppId(() => {
+            this.getAuth()
+          })
+        } else {
+          this.getAuth()
+        }
       }
+    },
+    getAuth() {
+      window.location.assign(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${ this.appId }&redirect_uri=${ encodeURIComponent(this.backUrl) }&response_type=code&scope=snsapi_userinfo&state=0&connect_redirect=1#wechat_redirect`)
     },
     logout() {
       storage.clear()

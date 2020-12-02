@@ -156,6 +156,8 @@ export default {
                   message: res.msg || '出错了'
                 })
               }
+            }).catch(err => {
+              this.loading = false
             })
           }, err => {
             this.loading = false
