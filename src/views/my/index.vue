@@ -12,10 +12,10 @@
     </el-header>
     <el-main>
       <ul class="lists">
-        <li @click="changeState">
+        <!-- <li @click="changeState">
           <p><i class="icon el-icon-chat-dot-round"></i> {{ openid ? '解绑微信' : '绑定微信' }}</p>
           <i class="el-icon-arrow-right"></i>
-        </li>
+        </li> -->
         <li @click="toChangePwd">
           <p><i class="icon el-icon-unlock"></i>修改密码</p>
           <i class="el-icon-arrow-right"></i>
