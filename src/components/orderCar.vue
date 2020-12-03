@@ -13,6 +13,7 @@
             :editable="false"
             type="date"
             clearable
+            format="yyyy-MM-dd"
             value-format="yyyy-MM-dd"
             placeholder="开始日期">
           </el-date-picker>
@@ -27,6 +28,7 @@
             type="date"
             clearable
             :picker-options="options"
+            format="yyyy-MM-dd"
             value-format="yyyy-MM-dd"
             placeholder="结束日期">
           </el-date-picker>
@@ -91,7 +93,7 @@ export default {
       error: false,
       form: {
         license: undefined,
-        dateRange: [new Date(new Date().getFullYear(), new Date().getMonth(), 1).toLocaleDateString().replace(/\//g, '-'), new Date(new Date().getFullYear(), new Date().getMonth()+1, 0).toLocaleDateString().replace(/\//g, '-')],
+        dateRange: [_this.parseTime(new Date(new Date().getFullYear(), new Date().getMonth(), 1).getTime(), '{y}-{m}-{d}'), _this.parseTime(new Date(new Date().getFullYear(), new Date().getMonth()+1, 0), '{y}-{m}-{d}')]
       },
       statusList: ['历史', '预约', '入场'],
       state: [], // 防重重点击
@@ -123,7 +125,6 @@ export default {
       if (this.form.dateRange.length) {
         filter = Object.assign({}, filter, { dateRange: this.form.dateRange })
       }
-
       this.$emit('search', { filter, status: this.status})
     },
     change(row) {

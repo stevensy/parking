@@ -335,7 +335,7 @@ export default {
 }
 
 .ul_input {
-  padding: 20px;
+  padding: 20px 10px;
   margin: 0 auto;
   display: flex;
 }

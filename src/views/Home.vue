@@ -115,7 +115,7 @@ export default {
       this[arr] = []
       this.loadmore({ status, filter }, this.infinite)
     },
-    loadmore({ status, page = 1, filter = {} }, state) {
+    loadmore({ status, page = 1, filter = { dateRange:  [this.parseTime(new Date(new Date().getFullYear(), new Date().getMonth(), 1).getTime(), '{y}-{m}-{d}'), this.parseTime(new Date(new Date().getFullYear(), new Date().getMonth()+1, 0), '{y}-{m}-{d}')]} }, state) {
       this.infinite = state
       let arr = this.arr.filter(item => item.code === status)[0].list
       bookingList(Object.assign({ status, pageSize: 10, page }, filter)).then(res => {

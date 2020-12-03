@@ -14,8 +14,8 @@
           <i v-else slot="suffix" class="el-icon-circle-plus-outline" @click.prevent.stop="addCar"></i>
         </el-input>
       </el-form-item>
-      <el-form-item label="联系人" prop="linkman">
-        <el-input size="mini" v-model.trim="orderForm.linkman" placeholder="请输入联系人"></el-input>
+      <el-form-item label="访客姓名" prop="linkman">
+        <el-input size="mini" v-model.trim="orderForm.linkman" placeholder="请输入访客姓名"></el-input>
       </el-form-item>
       <el-form-item label="电话" prop="linkmanPhone">
         <el-input size="mini" maxlength="11" v-model.trim="orderForm.linkmanPhone" placeholder="请输入电话"></el-input>
