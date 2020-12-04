@@ -55,14 +55,14 @@ export default {
       rules: {
         entryTime: [{ required: true, message: '请选择进场时间', trigger: 'change' }],
         leaveTime: [{ required: true, message: '请选择出场时间', trigger: 'change' }],
-        linkman: [
-          { required: true, message: '请输入联系人', trigger: 'blur' },
-          { pattern: /^[\u4E00-\u9FA5a-zA-Z]+$/, message: '请输入正确联系人' }
-        ],
-        linkmanPhone: [
-          { required: true, message: '请输入电话', trigger: 'blur' }, 
-          { pattern: /^1[3|4|5|8][0-9]\d{4,8}$/, message: '请输入正确手机号', trigger: 'blur' }
-        ]
+        // linkman: [
+        //   { required: true, message: '请输入联系人', trigger: 'blur' },
+        //   { pattern: /^[\u4E00-\u9FA5a-zA-Z]+$/, message: '请输入正确联系人' }
+        // ],
+        // linkmanPhone: [
+        //   { required: true, message: '请输入电话', trigger: 'blur' }, 
+        //   { pattern: /^1[3|4|5|8][0-9]\d{4,8}$/, message: '请输入正确手机号', trigger: 'blur' }
+        // ]
       },
       loading: false,
       showCarPlate: false,

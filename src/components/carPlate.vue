@@ -3,15 +3,17 @@
     <div>
       <div class="plate-wrap">
         <!-- 头部车牌号 -->
-        <div class="car_title">车牌号</div>
+        <div class="car_title">请输入车牌号<i class="el-icon-close close" @click="closePro" /> </div>
         <!-- 已输入信息 -->
         <div class="car_input">
           <ul class="clearfix ul_input">
             <li v-for="(item, index) in bindInput" :key="index" class="input_pp">
-              <span :class="item.classStyle">{{ chooseKey[index] || "" }}</span>
+              <span :class="item.classStyle" class="zi" v-if="index==7 && !chooseKey[7]">新能源</span>
+              <span :class="item.classStyle" v-if="index!=7 || chooseKey[7]">{{ chooseKey[index] || '' }}</span>
             </li>
           </ul>
         </div>
+        <div class="surebtn" @click="chooseKeyNums(37)">确认</div>
       </div>
       <!-- 填写省级简称和车牌信息 -->
       <div class="provinces-wrap">
@@ -22,10 +24,10 @@
           <li v-show="showFlag == 1" v-for="(item, index) in keyNums" :key="index + 999">
             <span @click="chooseKeyNums(index);">{{ keyNums[index] }}</span>
           </li>
-          <li class="li_close" @click="closePro();">
+          <li class="li_close" @click="closePro">
             <span>关闭</span>
           </li>
-          <li class="li_clean" @click="cleanPro();">
+          <li class="li_clean" @click="cleanPro">
             <span>清空</span>
           </li>
         </ul>
@@ -274,9 +276,23 @@ export default {
   box-shadow:0px 0px 30px 0px rgba(0,159,222,0.3);
   z-index: 9999;
   position: absolute;
-  top: 10%;
+  top: 20%;
 }
-
+.plate-wrap .close {
+  position: absolute;
+  right:20px;
+}
+.surebtn {
+  width: 90%;
+  margin: 20px auto;
+  height: 40px;
+  line-height: 40px;
+  background:#ff7e00;
+  text-align: center;
+  color: #fff;
+  letter-spacing: 2px;
+  border-radius: 4px;
+}
 .clearfix:after {
   content: ".";
   display: block;
@@ -298,6 +314,7 @@ export default {
   padding: 4px 2px;
   font-size: 14px;
   position: fixed;
+  width: 100%;
   bottom: 0;
   z-index: 9999;
   li {
@@ -354,13 +371,18 @@ export default {
 
 .ul_input li span {
   display: block;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: #F8F8F8;
   border-radius: 4px;
-  width: 30px;
+  width: 40px;
   margin: 0 auto;
-  height: 30px;
-  line-height: 30px;
+  font-size: 16px;
+  color:#000;
+  height: 40px;
+  line-height: 40px;
+}
+.ul_input li span.zi{
+  font-size: 10px;
+  color:#666;
 }
 
 .ul_keybord {
