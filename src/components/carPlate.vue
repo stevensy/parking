@@ -8,7 +8,7 @@
         <div class="car_input">
           <ul class="clearfix ul_input">
             <li v-for="(item, index) in bindInput" :key="index" class="input_pp">
-              <span :class="item.classStyle" class="zi" v-if="index==7 && !chooseKey[7]">新能源</span>
+              <span :class="item.classStyle" v-if="index==7 && !chooseKey[7]" class="newc"><b class="zi">新能源</b></span>
               <span :class="item.classStyle" v-if="index!=7 || chooseKey[7]">{{ chooseKey[index] || '' }}</span>
             </li>
           </ul>
@@ -245,14 +245,28 @@ export default {
         this.chooseKey.pop();
         this.currentIndex--;
         this.addStyle();
+        if (this.currentIndex === -1) {
+          this.currentIndex = 0;
+          this.showFlag = 0;
+        }
         
       } else {
         // 正常点击输入
+        if (this.currentIndex === 0 && typeof +this.keyNums[index] === 'number' && !isNaN(this.keyNums[index])) {
+          this.$message({
+            type: 'error',
+            message: '必需是字母',
+            customClass: 'msgTip',
+            duration: 1500
+          })
+          return
+        }
         this.currentIndex++;
         if (this.currentIndex > this.MAX_INDEX) {
           this.currentIndex = this.MAX_INDEX;
           this.chooseKey.pop();
         }
+        
         this.chooseKey.push(this.keyNums[index]);
         this.addStyle();
       }
@@ -266,6 +280,9 @@ export default {
   padding: 0;
   list-style: none;
   box-sizing: border-box;
+}
+.msgTip {
+  z-index: 10000 !important;
 }
 .plate-wrap {
   width: calc(100% - 2rem);
@@ -353,8 +370,9 @@ export default {
 
 .ul_input {
   padding: 20px 10px;
-  margin: 0 auto;
   display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .ul_input li .active {
@@ -363,9 +381,6 @@ export default {
 }
 
 .ul_input li {
-  float: left;
-  width: 14%;
-  padding: 2px;
   text-align: center;
 }
 
@@ -374,15 +389,24 @@ export default {
   background-color: #F8F8F8;
   border-radius: 4px;
   width: 40px;
-  margin: 0 auto;
   font-size: 16px;
   color:#000;
-  height: 40px;
-  line-height: 40px;
+  height: 45px;
+  line-height: 45px;
 }
-.ul_input li span.zi{
+.ul_input li span .zi{
   font-size: 10px;
-  color:#666;
+  color:#ddd;
+}
+@media (max-width: 359px) {
+  .ul_input li.newc {
+    width: 40px;
+  }
+  .ul_input li span{
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+  }
 }
 
 .ul_keybord {
