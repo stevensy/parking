@@ -77,8 +77,8 @@ export default {
       getTimeRange().then(res => {
         let _this = this
         // 设置默认值
-        this.orderForm.entryTime = new Date().getFullYear() + '-' + res.wheels[0].data[1].split(' ')[0].replace(/月/, '-').replace(/日/, ' ') + res.wheels[1].data[2]
-        this.orderForm.leaveTime = new Date().getFullYear() + '-' + res.wheels[0].data[1].split(' ')[0].replace(/月/, '-').replace(/日/, ' ') + res.wheels[1].data[18]
+        this.orderForm.entryTime = new Date().getFullYear() + '-' + res.wheels[0].data[1].split(' ')[0].replace(/月/, '-').replace(/日/, ' ') + res.wheels[1].data[0]
+        this.orderForm.leaveTime = new Date().getFullYear() + '-' + res.wheels[0].data[1].split(' ')[0].replace(/月/, '-').replace(/日/, ' ') + res.wheels[1].data[res.wheels[1].data.length - 1]
         var mobileSelect = new MobileSelect({
           trigger: '#trigger',
           title: '选择进场时间',
