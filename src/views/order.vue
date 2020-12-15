@@ -59,10 +59,10 @@ export default {
         //   { required: true, message: '请输入联系人', trigger: 'blur' },
         //   { pattern: /^[\u4E00-\u9FA5a-zA-Z]+$/, message: '请输入正确联系人' }
         // ],
-        // linkmanPhone: [
-        //   { required: true, message: '请输入电话', trigger: 'blur' }, 
-        //   { pattern: /^1[3|4|5|8][0-9]\d{4,8}$/, message: '请输入正确手机号', trigger: 'blur' }
-        // ]
+        linkmanPhone: [
+          { required: false, message: '请输入电话', trigger: 'blur' }, 
+          { pattern: /^1[3|4|5|8][0-9]\d{4,8}$/, message: '请输入正确手机号', trigger: 'blur' }
+        ]
       },
       loading: false,
       showCarPlate: false,
@@ -128,7 +128,7 @@ export default {
         if (valid) {
           // 较验时间
           let { username, account, linkman, linkmanPhone, entryTime, leaveTime } = this.orderForm
-          if (new Date(entryTime).getTime() >= new Date(leaveTime).getTime()) {
+          if (new Date(entryTime).getTime() > new Date(leaveTime).getTime()) {
             this.$message.error('离场时间不能小于进场时间!')
             return false
           }
