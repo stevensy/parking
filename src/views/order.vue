@@ -17,9 +17,9 @@
       <el-form-item label="访客姓名" prop="linkman">
         <el-input size="mini" v-model.trim="orderForm.linkman" placeholder="请输入访客姓名"></el-input>
       </el-form-item>
-      <el-form-item label="电话" prop="linkmanPhone">
+      <!-- <el-form-item label="电话" prop="linkmanPhone">
         <el-input size="mini" maxlength="11" v-model.trim="orderForm.linkmanPhone" placeholder="请输入电话"></el-input>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label-width="0">
         <el-button class="loginBtn" :loading="loading" type="primary" size="medium" @click="submit">预约</el-button>
       </el-form-item>

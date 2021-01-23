@@ -63,7 +63,8 @@ export default {
           this.loading = true
           let { account, password } = this.form
           setCookie('isRemember', this.checked ? 1 : 0)
-          login({ bind: this.type, account, password: md5(password), loginType: /^1[3|4|5|8][0-9]\d{4,8}$/.test(account) ? 'phone' : 'account', openid: this.openid, headimgurl: this.headimgurl, nickname: this.nickname, gender: this.sex && (this.sex + '') || undefined}).then(res => {
+          // loginType: /^1[3|4|5|8][0-9]\d{4,8}$/.test(account) ? 'phone' : 'account'
+          login({ bind: this.type, account, password: md5(password), loginType: 'account', openid: this.openid, headimgurl: this.headimgurl, nickname: this.nickname, gender: this.sex && (this.sex + '') || undefined}).then(res => {
             if (res.status) {
               this.$message({
                 type: 'success',
