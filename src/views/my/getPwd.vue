@@ -46,7 +46,8 @@ export default {
         ],
         verificationCode: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
         password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
-      }
+      },
+      isDisabled: false
     }
   },
   methods: {
@@ -57,7 +58,7 @@ export default {
         return false
       }
       getMScode({ phone }).then(res => {
-        if (res.status) {
+        // if (res.status) {
           this.$message.success('发送成功')
           const TIME_COUNT = 59;
           if (!this.timer) {
@@ -73,7 +74,7 @@ export default {
               }
             }, 1000)
           }
-        }
+        // }
       })
     },
     change() {
@@ -118,5 +119,6 @@ export default {
   color: #fff;
   background: #ff7e00;
   padding: 2px 7px;
+  
 }
 </style>
