@@ -36,6 +36,11 @@ const routes = [
     component: () => import('../views/my/getPwd.vue')
   },
   {
+    path: '/changePwd',
+    name: 'ChangePwd',
+    component: () => import('../views/my/changePwd.vue')
+  },
+  {
     path: '/order',
     name: 'Order',
     component: () => import('../views/order.vue')

@@ -110,3 +110,12 @@ export function findPWD (data) {
     data
   })
 }
+
+// 修改密码
+export function updatePWD (data) {
+  return request({
+    url: '/updateByPassword',
+    method: 'post',
+    data
+  })
+}

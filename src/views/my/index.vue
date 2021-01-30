@@ -95,7 +95,7 @@ export default {
       return true
     },
     toChangePwd() {
-      this.$router.push({path: '/getpwd'})
+      this.$router.push({path: '/changepwd'})
     },
     changeState() {
       if (this.state) {
