@@ -40,7 +40,7 @@ export default {
       if (!value) {
         callback(new Error('请确认新密码'))
       } else {
-        if (value === this.form.password) {
+        if (value === this.form.newPassword) {
           callback()
         } else {
           callback(new Error('密码输入不一致，请重新输入密码'))
